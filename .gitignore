@@ -1,0 +1,42 @@
+# Python / bytecode
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDEs / editors
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs
+*.log
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+
+# Generated artifacts / local data
+models/*.joblib
+models/*.pkl
+models/*.pickle
+data/
