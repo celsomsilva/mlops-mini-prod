@@ -1,0 +1,13 @@
+{
+  "trained_at": "2026-02-06T16:53:14.610497",
+  "model_type": "Ridge",
+  "features": [
+    "price",
+    "promotion",
+    "temperature"
+  ],
+  "target": "weekly_sales",
+  "rmse": 10.630149467398772,
+  "train_size": 800,
+  "test_size": 200
+}
