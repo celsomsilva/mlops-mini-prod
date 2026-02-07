@@ -4,7 +4,7 @@ A minimal, end-to-end **MLOps project** designed to practice taking a Machine Le
 
 The goal here is not to build the smartest model, but to build a model that can actually **run in production**.
 
-This repository shows the complete lifecycle train, package, serve, containerize, test, CI e deploy-ready
+This repository shows the complete lifecycle: train, package, serve, containerize, test, CI and deploy-ready
 
 I chose scikit-learn here because the focus is MLOps, not model complexity.
 
@@ -59,12 +59,10 @@ Think of it as a **production-ready template** for future ML systems.
 mlops-mini-prod/
   src/
    mlops_api/
-        init.py
+        __init__.py
    	api.py			#FastAPI application (/health, /predict)
    	train.py			#training script that generates the model     
    	predict.py			#inference logic
-   	features.py			#feature preparation
-   	settings.py			#configuration
   
   models/			#saved artifacts (model.joblib + metadata.json)
   
@@ -161,16 +159,20 @@ POST /predict
 Input:
 
 {
-   "x1": 10, "x2": 3
-   
+  "price": 12.5,
+  "promotion": 1,
+  "temperature": 25
 }
+
 
 Output:
 
 {
-   "prediction": 42.1, 
-   "model_version": "2026-02-04T18:10:22"
+  "prediction": 180.3,
+  "model_version": "2026-02-05T18:12:00",
+  "rmse": 10.63
 }
+
 
 ---
 
