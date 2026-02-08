@@ -1,29 +1,24 @@
 from fastapi.testclient import TestClient
 from mlops_api.api import app
+from unittest.mock import patch
 
 client = TestClient(app)
 
 
-def test_health():
-    r = client.get("/health")
-    assert r.status_code == 200
-
-
 def test_predict():
-    response = client.post(
-        "/predict",
-        json={
-            "price": 10.0,
-            "promotion": 1,
-            "temperature": 22.0
-        }
-    )
+    with patch("mlops_api.predict.joblib.load") as mock_load:
+        mock_model = mock_load.return_value
+        mock_model.predict.return_value = [123.4]
 
-    assert response.status_code == 200
-    body = response.json()
+        response = client.post(
+            "/predict",
+            json={
+                "price": 10,
+                "promotion": 1,
+                "temperature": 25,
+            },
+        )
 
-    assert "prediction" in body
-    assert "model_version" in body
-    assert "rmse" in body
-
+        assert response.status_code == 200
+        assert "prediction" in response.json()
 

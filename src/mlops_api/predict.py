@@ -1,23 +1,32 @@
-import json
 import joblib
-import numpy as np
+import json
+from pathlib import Path
+import pandas as pd
 
-model = joblib.load("models/model.joblib")
-metadata = json.load(open("models/metadata.json"))
+MODEL_PATH = Path("models/model.joblib")
+METADATA_PATH = Path("models/metadata.json")
+
+_model = None
+_metadata = None
+
+
+def load_model():
+    global _model, _metadata
+
+    if _model is None:
+        _model = joblib.load(MODEL_PATH)
+        _metadata = json.loads(METADATA_PATH.read_text())
 
 
 def predict(features: dict):
-    x = np.array([[
-        features["price"],
-        features["promotion"],
-        features["temperature"]
-    ]])
+    load_model()
 
-    y = model.predict(x)[0]
+    x = pd.DataFrame([features])
+    y = _model.predict(x)[0]
 
     return {
         "prediction": float(y),
-        "model_version": metadata["trained_at"],
-        "rmse": metadata["rmse"]
+        "model_version": _metadata["trained_at"],
+        "rmse": _metadata["rmse"],
     }
 
