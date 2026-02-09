@@ -8,17 +8,6 @@ This repository shows the complete lifecycle: train, package, serve, containeriz
 
 I chose scikit-learn here because the focus is MLOps, not model complexity.
 
----
-
----
-
-## Project Status
-
-This repository is **work-in-progress**.  
-
----
-
----
 
 ## Purpose
 
@@ -150,7 +139,7 @@ Response:
 
 {
   "status": "ok"
-	}
+}
 
 ### Prediction  
 
