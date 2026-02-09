@@ -1,3 +1,9 @@
+"""
+FastAPI application.
+
+Exposes health check and prediction endpoints for the ML service.
+"""
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 from mlops_api.predict import predict

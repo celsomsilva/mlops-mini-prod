@@ -1,3 +1,10 @@
+"""
+Offline training script.
+
+Generates a trained Ridge regression model and saves the model artifact
+and metadata to the models/ directory.
+"""
+
 from pathlib import Path
 import json
 from datetime import datetime

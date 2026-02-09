@@ -1,3 +1,10 @@
+"""
+Inference logic.
+
+Loads the trained model lazily and performs predictions
+based on incoming feature payloads.
+"""
+
 import joblib
 import json
 from pathlib import Path
