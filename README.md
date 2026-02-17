@@ -73,23 +73,37 @@ mlops-mini-prod/
 
 ## Running locally(development mode)
 
-Create and activate a virtual environment
+### Create and activate a virtual environment
+
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
 
+### Install dependencies and the local package
 
-Install dependencies and the local package
+```bash
 pip install -r requirements.txt
 pip install -e .
+```
 
-Train the model(offline step)
+### Train the model(offline step)
+
+```bash
 make train
+```
 
-Run tests
+### Run tests
+
+```bash
 make test
+```
 
-Start the API
+### Start the API
+
+```bash
 make run
+```
 
 Open:
 http://localhost:8000/docs
@@ -100,17 +114,21 @@ Interactive Swagger UI is available automatically.
 
 ## Running with Docker (production-like environment)
 
+```bash
 make docker
+```
 
 or
 
+```bash
 docker compose up --build
+```
 
----
+Running tests
 
-## Running tests
-
+```bash
 make test
+```
 
 ---
 
