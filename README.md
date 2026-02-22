@@ -8,6 +8,19 @@ This repository shows the complete lifecycle: train, package, serve, containeriz
 
 I chose scikit-learn here because the focus is MLOps, not model complexity.
 
+---
+
+## Live demo
+
+
+https://seuprojeto.onrender.com
+
+Documentation and Execution:
+
+https://seuprojeto.onrender.com/docs
+
+
+---
 
 ## Purpose
 
@@ -68,6 +81,33 @@ mlops-mini-prod/
 > The project follows the **src-layout packaging pattern**, so the application code is installed as a Python package (`mlops_api`).
 
 
+
+---
+
+## Model description
+
+This service exposes a machine learning model trained to predict **weekly retail sales**.
+
+
+### Target variable
+
+`weekly_sales`
+
+Represents the total weekly revenue.
+
+
+### Features
+
+- price: product price
+- promotion: promotion active (0 or 1)
+- temperature: environmental temperature
+
+
+### Model type
+
+Ridge regression.
+
+The model is intentionally simple. The focus of this project is the engineering pipeline, not model complexity.
 
 ---
 
@@ -161,15 +201,18 @@ Response:
 
 ### Prediction  
 
-POST /predict  
+- Go to "POST /predict"
+- "Try it out"   
+- Input, for example:
 
-Input:
 
 {
   "price": 12.5,
   "promotion": 1,
   "temperature": 25
 }
+
+Click on "Execute".
 
 
 Output:
