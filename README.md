@@ -13,11 +13,11 @@ I chose scikit-learn here because the focus is MLOps, not model complexity.
 ## Live demo
 
 
-https://seuprojeto.onrender.com
+https://mlops-mini-prod.onrender.com
 
 Documentation and Execution:
 
-https://seuprojeto.onrender.com/docs
+https://mlops-mini-prod.onrender.com/docs
 
 
 ---
