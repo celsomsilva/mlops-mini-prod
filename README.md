@@ -273,7 +273,7 @@ After this template is in place, it can easily be reused for:
 This project was developed by an engineer and data scientist with a background in:
 
 * Postgraduate degree in **Data Science and Analytics (USP)**
-* Bachelor's degree in **Bachelor of Science in Electrical and Computer Engineering (UERJ)**
+* Bachelor of **Science in Electrical and Computer Engineering (UERJ)**
 * Special interest in statistical models, interpretability, and applied AI
 * Strong interest in algorithmic reasoning, correctness, and performance evaluation
 
