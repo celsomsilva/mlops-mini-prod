@@ -8,6 +8,8 @@ This repository shows the complete lifecycle: train, package, serve, containeriz
 
 I chose scikit-learn here because the focus is MLOps, not model complexity.
 
+The repository [document-ai-mini-prod](https://github.com/celsomsilva/document-ai-mini-prod) is derived from this repository, adapting its minimal production structure to a Document AI pipeline.
+
 ---
 
 ## Live demo
