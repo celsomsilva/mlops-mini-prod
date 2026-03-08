@@ -76,6 +76,8 @@ mlops-mini-prod/
   Makefile			#shortcut commands
   requirements.txt		#dependencies
   pyproject.toml 		# package configuration (src-layout)
+  README.md
+  .gitignore
 ```
 
 > The project follows the **src-layout packaging pattern**, so the application code is installed as a Python package (`mlops_api`).
