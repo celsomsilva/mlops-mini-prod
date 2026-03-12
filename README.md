@@ -15,11 +15,9 @@ The repository [document-ai-pipeline](https://github.com/celsomsilva/document-ai
 ## Live demo
 
 
-https://mlops-production-pipeline.onrender.com
+[Project Home](https://mlops-mini-prod.onrender.com)
 
-Documentation and Execution:
-
-https://mlops-production-pipeline.onrender.com/docs
+[Documentation and Execution](https://mlops-mini-prod.onrender.com/docs)
 
 
 ---
