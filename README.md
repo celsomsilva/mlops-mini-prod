@@ -15,9 +15,9 @@ The repository [document-ai-pipeline](https://github.com/celsomsilva/document-ai
 ## Live demo
 
 
-[Project Home](https://mlops-mini-prod.onrender.com)
+[User-facing demo](https://mlops-mini-prod.onrender.com)
 
-[Documentation and Execution](https://mlops-mini-prod.onrender.com/docs)
+[Developer API docs](https://mlops-mini-prod.onrender.com/docs)
 
 
 ---
@@ -65,8 +65,15 @@ mlops-production-pipeline/
    	api.py			#FastAPI application (/health, /predict)
    	train.py			#training script that generates the model     
    	predict.py			#inference logic
+   templates/
+      index.html		# home page
+
+   static/
+      style.css			# css file
   
   models/			#saved artifacts (model.joblib + metadata.json)
+      model.joblib
+      metadata.jso
   
   tests/			#automated tests using pytest
   
