@@ -65,11 +65,11 @@ mlops-production-pipeline/
    	api.py			#FastAPI application (/health, /predict)
    	train.py			#training script that generates the model     
    	predict.py			#inference logic
-   templates/
-      index.html		# home page
+  templates/
+     index.html		# home page
 
-   static/
-      style.css			# css file
+  static/
+     style.css			# css file
   
   models/			#saved artifacts (model.joblib + metadata.json)
       model.joblib
