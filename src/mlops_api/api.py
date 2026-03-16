@@ -4,11 +4,14 @@ FastAPI application.
 Exposes health check and prediction endpoints for the ML service.
 """
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel
 import logging
 from mlops_api.predict import predict
 from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+
 
 
 logger = logging.getLogger(__name__)
@@ -58,24 +61,26 @@ This project demonstrates a complete MLOps pipeline including training, packagin
     version="1.0.0",
 )
 
+templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 from pydantic import BaseModel, Field
 
-
 class InputSchema(BaseModel):
-
     price: float = Field(
-        description="Product price",
+        gt=0,
+        description="Product price in USD",
         example=12.5
     )
-
     promotion: int = Field(
+        ge=0,
+        le=1,
         description="Promotion flag (0 = no promotion, 1 = promotion active)",
         example=1
     )
-
     temperature: float = Field(
-        description="Environmental temperature",
+        description="Environmental temperature in Celsius",
         example=25
     )
 
@@ -86,76 +91,16 @@ def startup_event():
 
 
 @app.get("/", response_class=HTMLResponse)
-def root():
-
-    return """
-    <html>
-        <head>
-            <title>Retail Sales Prediction API</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    margin: 40px;
-                    background-color: #f4f6f8;
-                    color: #333;
-                }
-                .container {
-                    background: white;
-                    padding: 30px;
-                    border-radius: 8px;
-                    max-width: 700px;
-                    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-                }
-                h1 {
-                    margin-top: 0;
-                }
-                a {
-                    display: inline-block;
-                    margin-top: 20px;
-                    padding: 10px 15px;
-                    background-color: #2563eb;
-                    color: white;
-                    text-decoration: none;
-                    border-radius: 5px;
-                }
-                a:hover {
-                    background-color: #1e40af;
-                }
-                .meta {
-                    margin-top: 20px;
-                    font-size: 14px;
-                    color: #666;
-                }
-            </style>
-        </head>
-        <body>
-
-            <div class="container">
-
-                <h1>Retail Sales Prediction API</h1>
-
-                <p>
-                Machine learning inference service deployed using FastAPI, Docker, and CI/CD.
-                </p>
-
-                <a href="/docs">Open interactive documentation/Execution</a>
-
-                <div class="meta">
-
-                    <p><strong>Model:</strong> Ridge regression</p>
-
-                    <p><strong>Target:</strong> weekly retail sales</p>
-
-                    <p><strong>Status:</strong> running</p>
-
-                </div>
-
-            </div>
-
-        </body>
-    </html>
-    """
-
+def root(request: Request):
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "model": "Ridge regression",
+            "target": "weekly retail sales",
+            "status": "running"
+        }
+    )
 
 
 @app.get("/health")

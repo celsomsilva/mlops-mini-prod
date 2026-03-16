@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Sales Prediction API</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="page">
+        <div class="card">
+            <h1>Retail Sales Prediction</h1>
+            <p class="subtitle">
+                End-to-end machine learning service for retail sales prediction, including model serving, containerization, automated testing and CI/CD.
+            </p>
+
+            <div class="meta">
+                <p><strong>Model:</strong> {{ model }}</p>
+                <p><strong>Target:</strong> {{ target }}</p>
+                <p><strong>Status:</strong> {{ status }}</p>
+            </div>
+
+            <hr>
+
+            <h2>Try a prediction</h2>
+
+            <div class="form-grid">
+                <label for="price">Price</label>
+                <input id="price" type="number" step="0.1" value="12.5">
+
+                <label for="promotion">Promotion</label>
+                <select id="promotion">
+                    <option value="0">0 - No</option>
+                    <option value="1" selected>1 - Yes</option>
+                </select>
+
+                <label for="temperature">Temperature</label>
+                <input id="temperature" type="number" step="0.1" value="25">
+            </div>
+
+            <button onclick="predictSales()">Predict</button>
+
+            <div id="result-box" class="result-box hidden">
+                <h3>Prediction result</h3>
+                <p id="result-main"></p>
+                <p id="result-version"></p>
+                <p id="result-rmse"></p>
+            </div>
+
+            <div id="error-box" class="error-box hidden"></div>
+
+            <div class="links">
+                <a href="/docs" target="_blank">Developer documentation</a>
+                <a href="/health" target="_blank">Health check</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    async function predictSales() {
+
+	    const button = document.querySelector("button");
+
+	    button.disabled = true;
+	    button.innerText = "Predicting...";
+
+	    const resultBox = document.getElementById("result-box");
+	    const errorBox = document.getElementById("error-box");
+
+	    resultBox.classList.add("hidden");
+	    errorBox.classList.add("hidden");
+	    errorBox.innerText = "";
+
+	    const price = parseFloat(document.getElementById("price").value);
+	    const promotion = parseInt(document.getElementById("promotion").value);
+	    const temperature = parseFloat(document.getElementById("temperature").value);
+
+	    try {
+		const response = await fetch("/predict", {
+		    method: "POST",
+		    headers: {
+		        "Content-Type": "application/json"
+		    },
+		    body: JSON.stringify({
+		        price: price,
+		        promotion: promotion,
+		        temperature: temperature
+		    })
+		});
+
+		const data = await response.json();
+
+		if (!response.ok) {
+		    throw new Error(data.detail || "Prediction failed");
+		}
+
+		document.getElementById("result-main").innerText =
+		    `Predicted weekly sales: $${Number(data.prediction).toFixed(2)}`;
+
+		document.getElementById("result-version").innerText =
+		    `Model version: ${data.model_version ?? "N/A"}`;
+
+		document.getElementById("result-rmse").innerText =
+		    `RMSE: ${data.rmse ?? "N/A"}`;
+
+		resultBox.classList.remove("hidden");
+
+	    } catch (error) {
+		errorBox.innerText = `Error: ${error.message}`;
+		errorBox.classList.remove("hidden");
+	    }
+
+	    button.disabled = false;
+	    button.innerText = "Predict";
+}
+</script>
+</body>
+</html>
